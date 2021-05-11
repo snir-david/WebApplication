@@ -2,6 +2,7 @@
 const express = require('express')
 const fileUpload = require('express-fileupload')
 const model = require('../Model/Learn')
+const util = require('../Model/Util')
 const app = express()
 //define app uses
 app.use(express.urlencoded({
@@ -14,15 +15,10 @@ app.get('/', (req, res) => {
     res.sendFile('index.html')
 })
 //Post Method for '/search' url
-app.post('/search', (req, res) => {
-    res.write('searching for ' + req.body.key + +':\n')
-    let key = req.body.key
-   if (req.files) {
-        let file = req.files.text_file
-        let result = model.searchText(key, file.data.toString())
-        res.write(result)
-    }
-    res.end()
+app.post('/detect', (req, res) => {
+    console.log('detect')
+    util.cov([1,2,34,4],[2,3,4,5],4)
+
 })
 
 //starting server on port 8080
