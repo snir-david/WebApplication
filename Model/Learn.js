@@ -1,3 +1,4 @@
+//TODO using JSON file (key, value) - checking 
 function searchText(key, text) {
     let result = ''
     text.split("\n").forEach(row => {
