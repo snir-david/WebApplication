@@ -1,6 +1,7 @@
 const util = require('./Util')
 const regression = require('./regression');
 const minCircle = require('./minCircle');
+const newmincirc = require('./tmp');
 
 function learnNormal(CSVMap) {
     let correlatedFeatures = [];
