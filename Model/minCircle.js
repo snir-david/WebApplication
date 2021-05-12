@@ -40,7 +40,10 @@ function twoPointsCircle(a, b) {
  * r = sqrt((x-x1)^2+(y-y1)^2)
  */
 function threePointsCircle(a, b, c) {
-    let points = {a, b, c};
+    let points = [];
+    points.push(a);
+    points.push(b);
+    points.push(c);
     //for all pairs trying to make circle without third point, if succeed return this circle,
     //else return circle with 3 points
     for (let i = 0; i < 3; i++) {
@@ -83,8 +86,9 @@ function swap(point, point2) {
 
 /*given vector of points, and vector with points that sit on boundary of the min circle.
  * this function work recursively until getting min circle. */
-function findMinWithBoundaryPoints(points, boundaryPoints, pointsSize) {
-    let randIdx = 0;
+function findMinWithBoundaryPoints(points, boundaryPoints, pointsSize, randPointsArr) {
+    //TODO create copy of point for recursive calls coming back
+    let randIdx = 1;
     //base case pointsSize == 0 || R.pointsSize ==3
     if (pointsSize === 0 || boundaryPoints.length === 3) {
         switch (boundaryPoints.length) {
@@ -99,29 +103,32 @@ function findMinWithBoundaryPoints(points, boundaryPoints, pointsSize) {
                 return threePointsCircle(boundaryPoints[0], boundaryPoints[1], boundaryPoints[2]);
                 break;
             default:
-                break;
+                return;
 
         }
     }
     //getting random Point from array
-    if (pointsSize > 0) {
-        randIdx = Math.floor(Math.random() * pointsSize);
+    if (pointsSize > 1) {
+        randIdx = Math.floor(Math.random() * pointsSize + 1);
     }
     let randPoint = {x: points[randIdx].x, y: points[randIdx].y};
+    randPointsArr.push(randPoint);
     //sending the random point to the end of the vector
     // so in next call it we be out of boundary of the vector size
     //swap(points[randIdx], points[pointsSize-1]);
     points.splice(randIdx, 1);
+    let copyPoints = points;
     //calculating min circle minCircle
-    let minCircle = findMinWithBoundaryPoints(points, boundaryPoints, points.length);
+    let minCircle = findMinWithBoundaryPoints(points, boundaryPoints, points.length -1, randPointsArr);
     //checking if the random point in the circle - if it is return the circle
-    if (pointIsInsideCircle(minCircle, randPoint)) {
+    let currRandPoint = randPointsArr.pop();
+    if (pointIsInsideCircle(minCircle, currRandPoint)) {
         return minCircle;
     } else { // else, point not in the circle, so it must be on the boundary
         //insert point to boundary points vector
-        boundaryPoints.push(randPoint);
+        boundaryPoints.push(currRandPoint);
         //calling function with the new boundary point
-        return findMinWithBoundaryPoints(points, boundaryPoints, points.length);
+        return findMinWithBoundaryPoints(copyPoints, boundaryPoints, points.length-1, randPointsArr);
     }
 }
 
@@ -135,7 +142,7 @@ function findMinWithBoundaryPoints(points, boundaryPoints, pointsSize) {
  * R size 3 return min circle using equation to find circle using 3 points.
  */
 function findMinCircle(points) {
-    let vectorPoints = [], boundaryPoints = [];
+    let boundaryPoints = [], randPointsIdx=[];
     //base cases - size == 0 || 1 || 2 || 3
     switch (points.length) {
         case 0:
@@ -152,11 +159,8 @@ function findMinCircle(points) {
         default:
             break;
     }
-    //inserting the array points into vector
-    for (let i = 0; i < points.length; i++) {
-        vectorPoints.push(points[i]);
-    }
-    return findMinWithBoundaryPoints(vectorPoints, boundaryPoints, points.length);
+    return findMinWithBoundaryPoints(points, boundaryPoints, points.length-1, randPointsIdx);
 }
 
 module.exports = findMinCircle;
+module.exports.pointIsInsideCircle = pointIsInsideCircle;

@@ -3,8 +3,8 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const regression = require('../Model/regression');
 const regressDetect = require('../Model/regressionDetect');
-const minCircle = require('../Model/minCircle');
-
+const hybrid = require('../Model/hybrid');
+const hybridDetect = require('../Model/hybridDetect');
 
 //define app and uses
 const app = express();
@@ -49,8 +49,6 @@ app.get('/', (req, res) => {
 
 //Post Method for '/search' url
 app.post('/detect', (req, res) => {
-    let c = minCircle([{x:5,y:7}, {x:6,y:7},{x:5,y:10},{x:10,y:20},{x:-1,y:-1},{x:2,y:2}])
-
     //console.log('detect')
     let learnFile = req.files.learn_file;
     let learnData = learnFile.data.toString();
@@ -60,10 +58,12 @@ app.post('/detect', (req, res) => {
     let detectMap = parsingCSV(detectData);
     switch (req.body.algo) {
         case "hybrid":
+            let corrFeaturesMin = hybrid(detectMap);
+            let anomalyReportMin = hybridDetect(detectMap, corrFeaturesMin);
             break;
         case "regression":
-            let corrFeatures = regression(learnMap);
-            let anomalyReport = regressDetect(detectMap, corrFeatures);
+            let corrFeaturesReg = regression.learnNormal(learnMap);
+            let anomalyReportReg = regressDetect(detectMap, corrFeaturesReg);
             break;
     }
 
