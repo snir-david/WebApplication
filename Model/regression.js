@@ -1,18 +1,16 @@
 const util = require('./Util')
 
-let correlatedFeatures ;
-
 function pointsToArray(csvMapElement, csvMapElement2) {
-    let points = new Array(csvMapElement.size);
-    for (let i = 0; i < csvMapElement.size; i++) {
-        points.push({x: csvMapElement[i], y: csvMapElement2[i]});
+    let points = new Array(csvMapElement.length);
+    for (let i = 1; i < csvMapElement.length; i++) {
+        points[i] = ({x: csvMapElement[i], y: csvMapElement2[i]});
     }
     return points;
 }
 
 function findThreshold(points, regLine) {
     let threshold = 0;
-    for (let i = 0; i < points.length; i++) {
+    for (let i = 1; i < points.length; i++) {
         let currPoint = util.dev(points[i], regLine);
         if (currPoint > threshold) {
             threshold = currPoint;
@@ -22,16 +20,22 @@ function findThreshold(points, regLine) {
 }
 
 function learnNormal(CSVMap) {
+    let correlatedFeatures = [];
+    let it = CSVMap.keys();
+    let keys = [];
+    for (let i = 0; i < CSVMap.size; i++) {
+        keys.push(it.next().value);
+    }
     for (let i = 0; i < CSVMap.size; i++) {
         for (let j = i + 1; j < CSVMap.size; j++) {
-            let personResult = util.pearson(CSVMap[i], CSVMap[j], CSVMap[j].size);
+            let personResult = util.pearson(CSVMap.get(keys[i]), CSVMap.get(keys[j]));
             if (personResult >= 0.9) {
-                let points = pointsToArray(CSVMap[i], CSVMap[j]);
-                let regLine = util.linear_reg(points, points.length);
+                let points = pointsToArray(CSVMap.get(keys[i]), CSVMap.get(keys[j]));
+                let regLine = util.linear_reg(points);
                 let threshold = 1.1 * findThreshold(points, regLine);
                 correlatedFeatures.push({
-                    feature1: CSVMap[i].key,
-                    feature2: CSVMap[j].key,
+                    feature1: keys[i],
+                    feature2: keys[j],
                     pearson: personResult,
                     regression: regLine,
                     threshold: threshold
@@ -39,6 +43,7 @@ function learnNormal(CSVMap) {
             }
         }
     }
+    return correlatedFeatures;
 }
+
 module.exports = learnNormal;
-module.exports.correlatedFeatures = correlatedFeatures;

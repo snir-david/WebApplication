@@ -1,27 +1,27 @@
-const learn = require('./Learn');
 const util = require('./Util');
-let anomalyReport;
 
-function findAnomaly(feature1, feature2, regLine, threshold) {
-    for (let i = 0; i < feature1.size; i++) {
+function findAnomaly(feature1, feature2, corrFeature, anomalyReport) {
+    for (let i = 1; i < feature1.length; i++) {
         let p = {x: feature1[i], y: feature2[i]};
-        let distance = util.dev(p, regLine);
-        if (distance > threshold) {
+        let distance = util.dev(p, corrFeature.regression);
+        if (distance > corrFeature.threshold) {
             anomalyReport.push({
                 timeStamp: i,
-                featureA: learn.correlatedFeatures[i].feature1,
-                featureB: learn.correlatedFeatures[i].feature2
+                featureA: corrFeature.feature1,
+                featureB: corrFeature.feature2
             });
         }
     }
 }
 
-function detect(anomalyMap) {
-    for (let i = 0; i < learn.correlatedFeatures.size; i++) {
-        let feature1 = anomalyMap.get(learn.correlatedFeatures[i].feature1);
-        let feature2 = anomalyMap.get(learn.correlatedFeatures[i].feature2);
-        findAnomaly(feature1, feature2, learn.correlatedFeatures[i].regression, learn.correlatedFeatures[i].threshold);
+function detect(anomalyMap,correlatedFeatures) {
+    let anomalyReport = [];
+    for (let i = 0; i < correlatedFeatures.length; i++) {
+        let feature1 = anomalyMap.get(correlatedFeatures[i].feature1);
+        let feature2 = anomalyMap.get(correlatedFeatures[i].feature2);
+        findAnomaly(feature1, feature2, correlatedFeatures[i], anomalyReport);
     }
+    return anomalyReport;
 }
 
 module.exports = detect;
