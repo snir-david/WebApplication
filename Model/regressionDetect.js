@@ -14,7 +14,7 @@ function findAnomaly(feature1, feature2, corrFeature, anomalyReport) {
     }
 }
 
-function detect(anomalyMap,correlatedFeatures) {
+function regressionDetect(anomalyMap, correlatedFeatures) {
     let anomalyReport = [];
     for (let i = 0; i < correlatedFeatures.length; i++) {
         let feature1 = anomalyMap.get(correlatedFeatures[i].feature1);
@@ -24,4 +24,4 @@ function detect(anomalyMap,correlatedFeatures) {
     return anomalyReport;
 }
 
-module.exports = detect;
+module.exports = regressionDetect;

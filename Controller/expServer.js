@@ -2,9 +2,10 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const regression = require('../Model/regression');
-const regressDetect = require('../Model/Detect');
+const regressDetect = require('../Model/regressionDetect');
+
+//define app and uses
 const app = express();
-//define app uses
 app.use(express.urlencoded({
     extended: false
 }))

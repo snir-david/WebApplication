@@ -89,5 +89,10 @@ module.exports = {
     dev: function (p, l) {
         let dev = l.f(p.x) - p.y;
         return Math.abs(dev);
+    },
+
+    findMinCircle: function (){
+
     }
 }
+
