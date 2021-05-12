@@ -31,7 +31,7 @@ function learnNormal(CSVMap) {
                 let threshold = 1.1 * findThreshold(points, regLine);
                 correlatedFeatures.push({
                     feature1: CSVMap[i].key,
-                    feature2: CSVMap[j].keys,
+                    feature2: CSVMap[j].key,
                     pearson: personResult,
                     regression: regLine,
                     threshold: threshold
