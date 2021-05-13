@@ -30,9 +30,9 @@ module.exports = {
             for (let j = i + 1; j < CSVMap.size; j++) {
                 let personResult = Math.abs(util.pearson(CSVMap.get(keys[i]), CSVMap.get(keys[j])));
                 if (personResult >= 0.9) {
-                    let points = pointsToArray(CSVMap.get(keys[i]), CSVMap.get(keys[j]));
+                    let points = this.pointsToArray(CSVMap.get(keys[i]), CSVMap.get(keys[j]));
                     let regLine = util.linear_reg(points);
-                    let threshold = 1.1 * findThreshold(points, regLine);
+                    let threshold = 1.1 * this.findThreshold(points, regLine);
                     correlatedFeatures.push({
                         feature1: keys[i],
                         feature2: keys[j],

@@ -6,7 +6,7 @@ function findAnomaly(feature1, feature2, corrFeature, anomalyReport) {
         let distance = util.dev(p, corrFeature.regression);
         if (distance > corrFeature.threshold) {
             anomalyReport.push({
-                timeStamp: i,
+                timeStep: i,
                 featureA: corrFeature.feature1,
                 featureB: corrFeature.feature2
             });

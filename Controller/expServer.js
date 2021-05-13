@@ -12,7 +12,7 @@ app.use(express.urlencoded({
     extended: false
 }))
 app.use(fileUpload({}));
-app.use(express.static('View'));
+app.use(express.static('../View'));
 
 function parsingCSV(csvFile) {
     //Store information for each individual person in an array index. Split it by every newline in the csv file.
@@ -64,9 +64,11 @@ app.post('/detect', (req, res) => {
         case "regression":
             let corrFeaturesReg = regression.learnNormal(learnMap);
             let anomalyReportReg = regressDetect(detectMap, corrFeaturesReg);
+            let myJsonString = JSON.stringify(anomalyReportReg);
+            res.write(myJsonString);
             break;
     }
-
+    res.end();
 })
 
 //starting server on port 8080
