@@ -5,6 +5,7 @@ const regression = require('../Model/regression');
 const regressDetect = require('../Model/regressionDetect');
 const hybrid = require('../Model/hybrid');
 const hybridDetect = require('../Model/hybridDetect');
+const html_tablify = require('html-tablify');
 
 //define app and uses
 const app = express();
@@ -68,11 +69,13 @@ app.post('/detect', (req, res) => {
             break;
     }
     let myJsonString = JSON.stringify(anomalyReport);
-    res.render( "../View/index.html", {myObj:myJsonString});
-    //res.set({"myObj":myJsonString})
-    //res.write(myJsonString);
+    let options = {
+        data: anomalyReport,
+        css: 'table {border: 10px solid red}'
+    };
 
-
+    let html_data = html_tablify.tablify(options);
+    res.write(html_data);
     res.end();
 })
 

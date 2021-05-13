@@ -14,6 +14,7 @@
     "express-fileupload": "^1.2.1"
   },
   "devDependencies": {
-    "ejs": "^3.1.6"
+    "ejs": "^3.1.6",
+    "html-tablify": "^2.0.2"
   }
 }

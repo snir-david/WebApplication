@@ -30,59 +30,7 @@
   <input type="submit" value="send files">
 </form>
 <br>
-
-<p id="container" ></p>
-<script>
-  let name = "<%= name %>"
-  // get handle on div
-  let container = document.getElementById('container');
-  // create table element
-  let table = document.createElement('table');
-  let tbody = document.createElement('tbody');
-  //create table header
-  let row = document.createElement('tr');
-  let cell1 = document.createElement('td');
-  cell1.textContent = "feature1";
-  let cell2 = document.createElement('td');
-  cell2.textContent = "feature2";
-  let cell3 = document.createElement('td');
-  cell3.textContent = "timeStep";
-  // append td to tr
-  row.appendChild(cell1);
-  row.appendChild(cell2);
-  row.appendChild(cell3);
-  row.setAttribute("bgcolor","#add8e6")
-
-  //append tr to tbody
-  tbody.appendChild(row);
-  myObj= [{"timeStamp":504,"featureA":"airspeed-kt","featureB":"airspeed-indicator_indicated-speed-kt"},
-    {"timeStamp":505,"featureA":"airspeed-kt","featureB":"airspeed-indicator_indicated-speed-kt"}]
-  // loop array
-  for (let i = 0; i < myObj.length; i++) {
-    // get inner array
-    let anomaly = myObj[i];
-    let anomaly_arr = [anomaly.featureA, anomaly.featureB, anomaly.timeStamp]
-    // create tr element
-    let row = document.createElement('tr');
-    for (let j = 0; j < anomaly_arr.length; j++){
-      // create td element
-      let cell = document.createElement('td');
-      // set text
-      cell.textContent = anomaly_arr[j];
-      // append td to tr
-      row.appendChild(cell);
-    }
-     //append tr to tbody
-    tbody.appendChild(row);
-  }
-  // append tbody to table
-  table.appendChild(tbody);
-  // append table to container
-  container.appendChild(table);
-  table.setAttribute("border", "2");
-  table.setAttribute("bgcolor","#d3d3d3")
-</script>
-
+<iframe name="result" width="80%" height="500" allowtransparency="true" frameborder="0"></iframe>
 <br>
 </body>
 </html>
