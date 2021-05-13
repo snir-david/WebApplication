@@ -1,1 +1,8 @@
-POST /localhost:3000/detect
+POST http://localhost:3000/detect?algo="hybrid"
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="learn_file"; filename="reg_fligth.csv"
+Content-Disposition: form-data; name="detect_file"; filename="anomalyWithHeaders.csv"
+
+###
