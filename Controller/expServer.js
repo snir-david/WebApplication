@@ -12,7 +12,7 @@ app.use(express.urlencoded({
     extended: false
 }))
 app.use(fileUpload({}));
-app.use(express.static('../View'));
+app.use(express.static('View'));
 
 function parsingCSV(csvFile) {
     //Store information for each individual person in an array index. Split it by every newline in the csv file.
@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 
 //Post Method for '/search' url
 app.post('/detect', (req, res) => {
-    //console.log('detect')
+    let corrFeatures, anomalyReport;
     let learnFile = req.files.learn_file;
     let learnData = learnFile.data.toString();
     let learnMap = parsingCSV(learnData);
@@ -58,16 +58,16 @@ app.post('/detect', (req, res) => {
     let detectMap = parsingCSV(detectData);
     switch (req.body.algo) {
         case "hybrid":
-            let corrFeaturesMin = hybrid(detectMap);
-            let anomalyReportMin = hybridDetect(detectMap, corrFeaturesMin);
+            corrFeatures = hybrid(detectMap);
+            anomalyReport = hybridDetect(detectMap, corrFeatures);
             break;
         case "regression":
-            let corrFeaturesReg = regression.learnNormal(learnMap);
-            let anomalyReportReg = regressDetect(detectMap, corrFeaturesReg);
-            let myJsonString = JSON.stringify(anomalyReportReg);
-            res.write(myJsonString);
+            corrFeatures = regression.learnNormal(learnMap);
+            anomalyReport = regressDetect(detectMap, corrFeatures);
             break;
     }
+    let myJsonString = JSON.stringify(anomalyReport);
+    res.write(myJsonString);
     res.end();
 })
 

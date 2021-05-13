@@ -6,7 +6,7 @@ function findAnomaly(feature1, feature2, corrFeature, anomalyReport) {
         let distance = util.dev(p, corrFeature.regression);
         if (distance > corrFeature.threshold) {
             anomalyReport.push({
-                timeStep: i,
+                timeStamp: i,
                 featureA: corrFeature.feature1,
                 featureB: corrFeature.feature2
             });
@@ -16,7 +16,7 @@ function findAnomaly(feature1, feature2, corrFeature, anomalyReport) {
 
 function regressionDetect(anomalyMap, correlatedFeatures) {
     let anomalyReport = [];
-    for (let i = 0; i < correlatedFeatures.length; i++) {
+    for (let i = 1; i < correlatedFeatures.length; i++) {
         let feature1 = anomalyMap.get(correlatedFeatures[i].feature1);
         let feature2 = anomalyMap.get(correlatedFeatures[i].feature2);
         findAnomaly(feature1, feature2, correlatedFeatures[i], anomalyReport);
