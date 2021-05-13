@@ -12,7 +12,8 @@ app.use(express.urlencoded({
     extended: false
 }))
 app.use(fileUpload({}));
-app.use(express.static('View'));
+app.use(express.static('../View'));
+app.engine('html', require('ejs').renderFile);
 
 function parsingCSV(csvFile) {
     //Store information for each individual person in an array index. Split it by every newline in the csv file.
@@ -67,7 +68,10 @@ app.post('/detect', (req, res) => {
             break;
     }
     let myJsonString = JSON.stringify(anomalyReport);
-    res.write(myJsonString);
+    res.render( "../View/index.html", {myObj:myJsonString});
+    //res.set({"myObj":myJsonString})
+    //res.write(myJsonString);
+
 
     res.end();
 })
