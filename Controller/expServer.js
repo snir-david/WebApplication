@@ -68,6 +68,7 @@ app.post('/detect', (req, res) => {
     }
     let myJsonString = JSON.stringify(anomalyReport);
     res.write(myJsonString);
+
     res.end();
 })
 

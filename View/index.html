@@ -5,6 +5,7 @@
   <title>Anomaly Detection Server</title>
 </head>
 <body>
+
 <form action="/detect" method="post" enctype="multipart/form-data" name="detect" target="result">
   <table>
     <tr>
@@ -29,7 +30,23 @@
   <input type="submit" value="send files">
 </form>
 <br>
-<iframe name="result" width="100%" height="500"></iframe>
+<script>
+  function addData() {
 
+  }
+</script>
+<table width="100%" border="2" id="anomalyTable" bgcolor="#d3d3d3" align="center" >Anomaly Report
+  <tr bgcolor="#add8e6">
+    <td align="center" id="timeStamp">&nbsp; Time Stamp</td>
+    <td align="center" id="feature1">&nbsp;Feature 1</td>
+    <td align="center" id="feature2">&nbsp;Feature 2</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<br>
 </body>
 </html>
