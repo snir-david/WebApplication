@@ -8,9 +8,9 @@ function findAnomaly(feature1, feature2, corrFeature, anomalyReport) {
         let distance = util.dev(p, corrFeature.regression);
         if (distance > corrFeature.threshold) {
             anomalyReport.push({
-                timeStamp: i,
-                featureA: corrFeature.feature1,
-                featureB: corrFeature.feature2
+                TimeStamp: i,
+                FeatureA: corrFeature.feature1,
+                FeatureB: corrFeature.feature2
             });
         }
     }
@@ -33,9 +33,9 @@ function hybridDetect(anomalyMap, correlatedFeatures){
                 let point  = ({x: feature1[j] , y: feature2[j]});
                 if (!minCircle.pointIsInsideCircle(circle, point)){
                     anomalyReport.push({
-                        timeStamp: j,
-                        featureA: correlatedFeatures[i].feature1,
-                        featureB: correlatedFeatures[i].feature2
+                        TimeStamp: j,
+                        FeatureA: correlatedFeatures[i].feature1,
+                        FeatureB: correlatedFeatures[i].feature2
                     });
                 }
 

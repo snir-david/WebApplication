@@ -1,4 +1,4 @@
-POST http://localhost:3000/detect?algo="hybrid"
+POST http://localhost:3000/detect
 Content-Type: multipart/form-data; boundary=boundary
 
 --boundary
