@@ -13,8 +13,9 @@ app.use(express.urlencoded({
     extended: false
 }))
 app.use(fileUpload({}));
-app.use(express.static('../View'));
-app.engine('html', require('ejs').renderFile);
+app.use(express.static('View'));
+
+
 
 function parsingCSV(csvFile) {
     //Store information for each individual person in an array index. Split it by every newline in the csv file.
@@ -59,11 +60,11 @@ app.post('/detect', (req, res) => {
     let detectData = detectFile.data.toString();
     let detectMap = parsingCSV(detectData);
     switch (req.body.algo) {
-        case "hybrid":
+        case "Hybrid Algorithm":
             corrFeatures = hybrid(detectMap);
             anomalyReport = hybridDetect(detectMap, corrFeatures);
             break;
-        case "regression":
+        case "Regression Algorithm":
             corrFeatures = regression.learnNormal(learnMap);
             anomalyReport = regressDetect(detectMap, corrFeatures);
             break;
@@ -71,11 +72,12 @@ app.post('/detect', (req, res) => {
     let myJsonString = JSON.stringify(anomalyReport);
     let options = {
         data: anomalyReport,
-        css: 'table {border: 10px solid red}'
+        css:['text-align: center', 'bgcolor: #d3d3d3']
     };
 
     let html_data = html_tablify.tablify(options);
     res.write(html_data);
+    res.send(myJsonString);
     res.end();
 })
 

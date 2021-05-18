@@ -1,36 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    body {
+        background-image: url("airplane-aircraft-wallpaper-hd-1920x1200-484418.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+    div {
+        text-align: center;
+        size: auto;
+    }
+
+    iframe {
+        border-style: none;
+        overflow: auto;
+        font-family: "Cambria Math", serif;
+    }
+
+</style>
+
+<script>
+    function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        obj.style.width = (obj.contentWindow.document.documentElement.scrollWidth + 5) + 'px';
+    }
+</script>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Anomaly Detection Server</title>
+    <meta charset="UTF-8">
+    <title>Anomaly Detection Server</title>
 </head>
 <body>
-
-<form action="/detect" method="post" enctype="multipart/form-data" name="detect" target="result">
-  <table>
-    <tr>
-      <td><label for="algo">Choose your algorithm from the list:</label>
-        <input list="algorithms" name="algo" id="algo">
-
-        <datalist id="algorithms">
-          <option value="hybrid">
-          <option value="regression">
-
-        </datalist></td>
-    </tr>
-    <tr>
-      <td><input type="file" name="learn_file"></td>
-      <td>learn file</td>
-    </tr>
-    <tr>
-      <td><input type="file" name="detect_file"></td>
-      <td>regressionDetect file</td>
-    </tr>
-  </table>
-  <input type="submit" value="send files">
+<h1 style="text-align: center; font-family: fantasy">Welcome to Flight Anomaly Server!</h1>
+<form action="/detect" method="post" enctype="multipart/form-data" name="detect" target="result"
+      style="text-align:center">
+    <table style="text-align: center" align="center">
+        <tr>
+            <td><label for="algo" style="font-size: large">Choose your algorithm from the list:</label>
+                <input list="algorithms" name="algo" id="algo">
+                <datalist id="algorithms">
+                    <option>Hybrid Algorithm</option>
+                    <option>Regression Algorithm</option>
+                </datalist>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="file" name="learn_file"></td>
+            <td>Upload File to learn correlations</td>
+        </tr>
+        <tr>
+            <td><input type="file" name="detect_file"></td>
+            <td>Upload File to detect Anomalies</td>
+        </tr>
+    </table>
+    <input type="submit" value="send files" onclick="">
 </form>
 <br>
-<iframe name="result" width="80%" height="500" allowtransparency="true" frameborder="0"></iframe>
-<br>
+<div>
+    <iframe name="result" onload="resizeIframe(this)"></iframe>
+</div>
 </body>
 </html>
