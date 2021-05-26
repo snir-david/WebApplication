@@ -27,7 +27,6 @@ function hybridDetect(anomalyMap, correlatedFeatures){
         else{
             let feature1 = anomalyMap.get(correlatedFeatures[i].feature1);
             let feature2 = anomalyMap.get(correlatedFeatures[i].feature2);
-
             let circle  = ({center: correlatedFeatures[i].center , radius: correlatedFeatures[i].threshold});
             for (let j = 1; j < feature1.length; j++){
                 let point  = ({x: feature1[j] , y: feature2[j]});
