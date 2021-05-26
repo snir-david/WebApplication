@@ -30,7 +30,6 @@ function learnNormal(CSVMap) {
                     feature1: keys[i],
                     feature2: keys[j],
                     pearson: personResult,
-                    //regression: ,
                     center: circle.center,
                     threshold: circle.radius * 1.1
                 })
