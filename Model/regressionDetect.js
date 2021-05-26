@@ -21,7 +21,8 @@ function regressionDetect(anomalyMap, correlatedFeatures) {
         let feature2 = anomalyMap.get(correlatedFeatures[i].feature2);
         findAnomaly(feature1, feature2, correlatedFeatures[i], anomalyReport);
     }
-    return anomalyReport;
+    let myJsonString = JSON.stringify(anomalyReport)
+    return myJsonString;
 }
 
 module.exports = regressionDetect;

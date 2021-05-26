@@ -43,7 +43,8 @@ function hybridDetect(anomalyMap, correlatedFeatures){
 
         }
     }
-    return anomalyReport;
+    let myJsonString = JSON.stringify(anomalyReport)
+    return myJsonString;
 }
 module.exports = hybridDetect;
 

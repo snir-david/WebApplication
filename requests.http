@@ -1,8 +1,20 @@
-POST http://localhost:3000/detect
-Content-Type: multipart/form-data; boundary=boundary
+# curl -X POST -L http://localhost:3000/detect -F algo=hybrid -F learn_file=@reg_flight.csv -F detect_file=@anomalyWithHeaders.csv
+POST http://localhost:8080/detect
+Content-Type: multipart/form-data; boundary=WebAppBoundary
 
---boundary
-Content-Disposition: form-data; name="learn_file"; filename="reg_fligth.csv"
+--WebAppBoundary
+Content-Disposition: form-data; name="algo"
+
+Regression Algorithm
+--WebAppBoundary
+Content-Disposition: form-data; name="learn_file"; filename="reg_flight.csv"
+
+< reg_flight.csv
+--WebAppBoundary
 Content-Disposition: form-data; name="detect_file"; filename="anomalyWithHeaders.csv"
 
+< anomalyWithHeaders.csv
+--WebAppBoundary--
+
 ###
+
