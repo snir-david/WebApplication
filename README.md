@@ -31,7 +31,7 @@ The CSV files are upload to the server and return a table with anomalies that we
   `$ npm i express-fileupload`\
 for more information enter [here](https://www.npmjs.com/package/express-fileupload).
  - **For Users** -
- browse - 
+ Make sure that server is on and browse - 
  >  http://localhost:8080/
  
  upload files and wait until the result shows up.
