@@ -12,7 +12,7 @@ app.use(express.urlencoded({
     extended: false
 }))
 app.use(fileUpload({}));
-app.use(express.static('View'));
+app.use(express.static('../View'));
 
 
 /** parsing csv files got from user **/
