@@ -31,10 +31,10 @@ After the server runs the algorithm to learn & detect and results are ready, the
  for more information enter [here](https://expressjs.com/en/starter/installing.html).
  - [ ]  **express-fileupload module** - in the command line (after installed npm) enter  -\
   `$ npm i express-fileupload`\
-  for more information enter [here](https://www.npmjs.com/package/express-fileupload).\
+  for more information enter [here](https://www.npmjs.com/package/express-fileupload).
  - [ ]  **Working Directory** - Make sure your working directory is set to -\
 ` ~\webapplication\Controller`\
-if it is not, please change it for all things to run smoothly.\
+if it is not, please change it for all things to run smoothly.
  - **For Users** -
  Make sure that server is running and browse  to - 
  >  http://localhost:8080/
