@@ -11,10 +11,9 @@ After the server runs the algorithm to learn & detect and results are ready, the
 ## Directory hierarchy
 
 **Model**:
- - **Util.js**- useful function such as pearson, correlation, find the distance between a point and line and etc.
- - **hybrid and hybrid Detect.js** - using to learn data and detect anomalies using the hybrid algorithm. Correlation higher than 0.9 checked in regression algorithm.\
- Correlation under 0.9 but bigger than 0.5 - checked in minimum closer circle algorithm.
- - **regression and regression  Detect.js** -  using to learn data and detect anomalies using regression algorithm.
+ - **Connect**- Opening a connection with the server in a separate thread, the IP and port arguments are given by the user.\
+ - **Task** - Puts a new task in the Thread tasks queue, the task contains a command with a new value to one of the flight values, according to the movement of the joystick.\
+ - **FGModel** -  using to learn data and detect anomalies using regression algorithm.
 
  **Controller**:
 - **expServer.js** - server itself. using express node.js module for the server. Handling HTTP GET '/' request and POST '/detect' request. 
